@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100vh;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #111;
+        }
+        #keyboard {
+            background-color: #333;
+            border: 1px solid black;
+            padding: 200px 20px 30px 20px;
+            width: 90vw;
+            max-width: 1400px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+        #keypad {
+            background-color: red;
+            display: flex;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .whiteKey {
+            height: 240px;
+            width: 40px;
+            background-color: white;
+            border: 1px solid black;
+            position: relative;
+            border-radius: 0 0 6px 6px;
+            box-shadow: inset 0 -6px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
+        }
+        .blackKey {
+            height: 140px;
+            width: 24px;
+            background-color: black;
+            border: 1px solid black;
+            margin: 0 -13px;
+            z-index: 2;
+            position: relative;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: background-color 0.1s ease, box-shadow 0.1s ease, transform 0.1s ease;
+        }
+
+        .whiteKey:hover {
+            background-color: #f0f0f0;
+            box-shadow: inset 0 -2px 6px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.2);
+            transform: translateY(1px);
+        }
+        .blackKey:hover {
+            background-color: #333;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+            transform: translateY(1px);
+        }
+
+        .whiteKey::after, .blackKey::after {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            line-height: 1;
+            pointer-events: none;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+        .whiteKey::after {
+            bottom: 6px;
+            color: #222;
+        }
+        .blackKey::after {
+            bottom: 4px;
+            color: #eee;
+        }
+        #keypad > div:nth-child(12n + 1)::after { content: 'C'; }
+        #keypad > div:nth-child(12n + 2)::after { content: 'C#'; }
+        #keypad > div:nth-child(12n + 3)::after { content: 'D'; }
+        #keypad > div:nth-child(12n + 4)::after { content: 'Eb'; }
+        #keypad > div:nth-child(12n + 5)::after { content: 'E'; }
+        #keypad > div:nth-child(12n + 6)::after { content: 'F'; }
+        #keypad > div:nth-child(12n + 7)::after { content: 'F#'; }
+        #keypad > div:nth-child(12n + 8)::after { content: 'G'; }
+        #keypad > div:nth-child(12n + 9)::after { content: 'G#'; }
+        #keypad > div:nth-child(12n + 10)::after { content: 'A'; }
+        #keypad > div:nth-child(12n + 11)::after { content: 'Bb'; }
+        #keypad > div:nth-child(12n + 12)::after { content: 'B'; }
+    </style>
+</head>
+<body>
+    <div id="keyboard">
+        <div id="keypad">            
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>            
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>
+            <div class="whiteKey"></div>
+            <div class="blackKey"></div>            
+            <div class="whiteKey"></div>                       
+            <div class="whiteKey"></div>
+        </div>
+    </div>
+</body>
+</html>

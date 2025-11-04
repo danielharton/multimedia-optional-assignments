@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle - Lab 3</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <script type="text/javascript" src="scripts/wordle.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <h1>Wordle</h1>
+
+        <div id="stats"></div>
+
+        <div id="board"></div>
+
+        <div class="controls">
+            <input type="text" id="guessInput" maxlength="5" autocomplete="off" aria-label="Enter 5-letter guess" placeholder="Enter 5 letters" />
+            <button type="button" id="guessButton">Guess</button>
+            <button type="button" id="newGameButton" class="hidden">New Game</button>
+        </div>
+
+        <div id="message" aria-live="polite"></div>
+    </div>
+</body>
+
+</html>

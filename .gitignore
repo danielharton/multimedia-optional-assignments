@@ -113,3 +113,6 @@ x86/
 .metadata/
 *.code-workspace
 
+3.7z
+.gitignore
+3.zip
