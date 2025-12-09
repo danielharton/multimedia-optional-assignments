@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Canvas Charts</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <script src="scripts/chart.js" type="text/javascript" defer></script>
+</head>
+<body class="theme-dark">
+    <div class="page">
+        <aside class="controls">
+            <h1>Dynamic Chart Lab</h1>
+
+            <div class="control-group">
+                <button id="startPauseBtn" class="primary">Pause</button>
+                <button id="resetBtn">Reset</button>
+                <button id="exportBtn">Export PNG</button>
+            </div>
+
+            <div class="control-group">
+                <label>
+                    Update interval
+                    <input id="intervalInput" type="range" min="200" max="2000" step="100" value="1000">
+                    <span id="intervalValue">1000 ms</span>
+                </label>
+            </div>
+
+            <div class="control-group inline">
+                <label>
+                    Min value
+                    <input id="minInput" type="number" value="0">
+                </label>
+                <label>
+                    Max value
+                    <input id="maxInput" type="number" value="600">
+                </label>
+            </div>
+
+            <div class="control-group inline">
+                <label class="checkbox">
+                    <input id="gridToggle" type="checkbox" checked>
+                    Show grid
+                </label>
+                <label class="checkbox">
+                    <input id="smoothToggle" type="checkbox">
+                    Smooth lines
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label>
+                    Chart type
+                    <select id="chartTypeSelect">
+                        <option value="line">Line</option>
+                        <option value="area">Area</option>
+                        <option value="bar">Bar</option>
+                        <option value="scatter">Scatter</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label>
+                    Theme
+                    <select id="themeSelect">
+                        <option value="theme-dark">Dark</option>
+                        <option value="theme-light">Light</option>
+                        <option value="theme-contrast">High contrast</option>
+                    </select>
+                </label>
+            </div>
+        </aside>
+
+        <main class="canvas-panel">
+            <div class="canvas-wrapper">
+                <canvas id="chartCanvas" width="900" height="600"></canvas>
+                <div id="tooltip" class="tooltip hidden"></div>
+            </div>
+            <section class="stats">
+                <h2>Live statistics</h2>
+                <div id="statsPanel" class="stats-grid"></div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

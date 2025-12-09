@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/midi.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="column">
+                <h3>Virtual Piano</h3>
+                <div class="note-display" id="noteDisplay">Ready</div>
+            </div>
+            <div class="column">
+                <div class="field">
+                    <label for="volumeControl">Volume</label>
+                    <input type="range" min="0" max="1" step="0.01" value="0.8" id="volumeControl">
+                </div>
+                <div class="field">
+                    <label for="waveformSelect">Waveform</label>
+                    <select id="waveformSelect">
+                        <option value="sine">Sine</option>
+                        <option value="square">Square</option>
+                        <option value="sawtooth" selected>Sawtooth</option>
+                        <option value="triangle">Triangle</option>
+                    </select>
+                </div>
+                <div class="field inline">
+                    <button id="octaveDown">Octave -</button>
+                    <span id="octaveValue">0</span>
+                    <button id="octaveUp">Octave +</button>
+                </div>
+                <div class="field presets">
+                    <button data-preset="piano">Piano</button>
+                    <button data-preset="organ">Organ</button>
+                    <button data-preset="strings">Strings</button>
+                    <button data-preset="lead">Lead</button>
+                </div>
+            </div>
+            <div class="column adsr">
+                <div class="field">
+                    <label for="attack">Attack</label>
+                    <input id="attack" type="range" min="0" max="1" step="0.01" value="0.02">
+                </div>
+                <div class="field">
+                    <label for="decay">Decay</label>
+                    <input id="decay" type="range" min="0" max="1" step="0.01" value="0.15">
+                </div>
+                <div class="field">
+                    <label for="sustain">Sustain</label>
+                    <input id="sustain" type="range" min="0" max="1" step="0.01" value="0.7">
+                </div>
+                <div class="field">
+                    <label for="release">Release</label>
+                    <input id="release" type="range" min="0" max="2" step="0.01" value="0.25">
+                </div>
+            </div>
+        </header>
+
+        <section class="controls">
+            <div class="control-group">
+                <h4>Recording</h4>
+                <button id="recordBtn">Record</button>
+                <button id="stopRecordBtn">Stop</button>
+                <button id="playRecordBtn">Play</button>
+                <div class="spacer"></div>
+                <button id="audioRecordBtn">Start Audio Capture</button>
+                <button id="audioStopBtn">Stop Audio Capture</button>
+                <a id="downloadLink" href="#" download="piano.wav">Download</a>
+            </div>
+            <div class="control-group">
+                <h4>Effects</h4>
+                <label><input type="checkbox" id="reverbToggle"> Reverb</label>
+                <label><input type="checkbox" id="delayToggle"> Delay</label>
+                <label><input type="checkbox" id="distortionToggle"> Distortion</label>
+                <div class="field small">
+                    <label for="delayTime">Delay Time</label>
+                    <input id="delayTime" type="range" min="0" max="1.5" step="0.05" value="0.35">
+                </div>
+                <div class="field small">
+                    <label for="delayFeedback">Delay Feedback</label>
+                    <input id="delayFeedback" type="range" min="0" max="0.9" step="0.05" value="0.35">
+                </div>
+                <div class="field small">
+                    <label for="reverbLevel">Reverb Level</label>
+                    <input id="reverbLevel" type="range" min="0" max="1" step="0.05" value="0.4">
+                </div>
+                <div class="field small">
+                    <label for="distortionAmount">Drive</label>
+                    <input id="distortionAmount" type="range" min="0" max="1000" step="50" value="0">
+                </div>
+            </div>
+            <div class="control-group">
+                <h4>Metronome</h4>
+                <label for="metronomeBpm">BPM</label>
+                <input type="number" id="metronomeBpm" min="40" max="240" value="110">
+                <button id="metronomeToggle">Start</button>
+                <div class="spacer"></div>
+                <h4>Labels</h4>
+                <button id="toggleLabels">Toggle labels</button>
+                <div class="spacer"></div>
+                <h4>Chords</h4>
+                <div class="chords">
+                    <button data-chord="C">C maj</button>
+                    <button data-chord="G">G maj</button>
+                    <button data-chord="Am">A min</button>
+                    <button data-chord="F">F maj</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="keyboard">
+            <div class="keypad">
+                <!-- OCTAVE 2 -->
+                <div class="key white" data-midi-code="36" data-note="C2"><span>C2</span></div>            
+                <div class="key black" data-midi-code="37" data-note="Db2"><span>C#2</span></div>
+                <div class="key white" data-midi-code="38" data-note="D2"><span>D2</span></div>
+                <div class="key black" data-midi-code="39" data-note="Eb2"><span>Eb2</span></div>
+                <div class="key white" data-midi-code="40" data-note="E2"><span>E2</span></div>
+                <div class="key white" data-midi-code="41" data-note="F2"><span>F2</span></div>
+                <div class="key black" data-midi-code="42" data-note="Gb2"><span>F#2</span></div>
+                <div class="key white" data-midi-code="43" data-note="G2"><span>G2</span></div>
+                <div class="key black" data-midi-code="44" data-note="Ab2"><span>G#2</span></div>
+                <div class="key white" data-midi-code="45" data-note="A2"><span>A3</span></div>
+                <div class="key black" data-midi-code="46" data-note="Bb2"><span>Bb2</span></div>
+                <div class="key white" data-midi-code="47" data-note="B2"><span>B2</span></div>
+
+                <div class="key white" data-midi-code="48" data-note="C3"><span>C3</span></div>
+                <div class="key black" data-midi-code="49" data-note="Db3"><span>C#3</span></div>
+                <div class="key white" data-midi-code="50" data-note="D3"><span>D3</span></div>
+                <div class="key black" data-midi-code="51" data-note="Eb3"><span>Eb3</span></div>
+                <div class="key white" data-midi-code="52" data-note="E3"><span>E3</span></div>
+                <div class="key white" data-midi-code="53" data-note="F3"><span>F3</span></div>
+                <div class="key black" data-midi-code="54" data-note="Gb3"><span>F#3</span></div>
+                <div class="key white" data-midi-code="55" data-note="G3"><span>G3</span></div>
+                <div class="key black" data-midi-code="56" data-note="Ab3"><span>G#3</span></div>
+                <div class="key white" data-midi-code="57" data-note="A3"><span>A3</span></div>
+                <div class="key black" data-midi-code="58" data-note="Bb3"><span>Bb3</span></div>
+                <div class="key white" data-midi-code="59" data-note="B3"><span>B3</span></div>
+                
+                <div class="key white" data-midi-code="60" data-note="C4"><span>C4</span></div>
+                <div class="key black" data-midi-code="61" data-note="Db4"><span>C#4</span></div>
+                <div class="key white" data-midi-code="62" data-note="D4"><span>D4</span></div>
+                <div class="key black" data-midi-code="63" data-note="Eb4"><span>Eb4</span></div>
+                <div class="key white" data-midi-code="64" data-note="E4"><span>E4</span></div>
+                <div class="key white" data-midi-code="65" data-note="F4"><span>F4</span></div>
+                <div class="key black" data-midi-code="66" data-note="Gb4"><span>F#4</span></div>
+                <div class="key white" data-midi-code="67" data-note="G4"><span>G4</span></div>
+                <div class="key black" data-midi-code="68" data-note="Ab4"><span>G#4</span></div>
+                <div class="key white" data-midi-code="69" data-note="A4"><span>A4</span></div>
+                <div class="key black" data-midi-code="70" data-note="Bb4"><span>Bb4</span></div>
+                <div class="key white" data-midi-code="71" data-note="B4"><span>B4</span></div>
+                
+                <div class="key white" data-midi-code="72" data-note="C5"><span>C5</span></div>
+                <div class="key black" data-midi-code="73" data-note="Db5"><span>C#5</span></div>
+                <div class="key white" data-midi-code="74" data-note="D5"><span>D5</span></div>
+                <div class="key black" data-midi-code="75" data-note="Eb5"><span>Eb5</span></div>
+                <div class="key white" data-midi-code="76" data-note="E5"><span>E5</span></div>
+                <div class="key white" data-midi-code="77" data-note="F5"><span>F5</span></div>
+                <div class="key black" data-midi-code="78" data-note="Gb5"><span>F#5</span></div>
+                <div class="key white" data-midi-code="79" data-note="G5"><span>G5</span></div>
+                <div class="key black" data-midi-code="80" data-note="Ab5"><span>G#5</span></div>
+                <div class="key white" data-midi-code="81" data-note="A5"><span>A5</span></div>
+                <div class="key black" data-midi-code="82" data-note="Bb5"><span>Bb5</span></div>
+                <div class="key white" data-midi-code="83" data-note="B5"><span>B5</span></div>
+
+                <div class="key white" data-midi-code="84" data-note="C6"><span>C6</span></div> 
+                <div class="key black" data-midi-code="85" data-note="Db6"><span>C#6</span></div>
+                <div class="key white" data-midi-code="86" data-note="D6"><span>D6</span></div>
+                <div class="key black" data-midi-code="87" data-note="Eb6"><span>Eb6</span></div>
+                <div class="key white" data-midi-code="88" data-note="E6"><span>E6</span></div>
+                <div class="key white" data-midi-code="89" data-note="F6"><span>F6</span></div>
+                <div class="key black" data-midi-code="90" data-note="Gb6"><span>F#6</span></div>
+                <div class="key white" data-midi-code="91" data-note="G6"><span>G6</span></div>
+                <div class="key black" data-midi-code="92" data-note="Ab6"><span>G#6</span></div>
+                <div class="key white" data-midi-code="93" data-note="A6"><span>A6</span></div>
+                <div class="key black" data-midi-code="94" data-note="Bb6"><span>Bb6</span></div>
+                <div class="key white" data-midi-code="95" data-note="B6"><span>B6</span></div>
+
+                <div class="key white" data-midi-code="96" data-note="C7"><span>C7</span></div> 
+            </div>
+        </div>
+
+        <section class="visuals">
+            <canvas id="spectrum" width="800" height="180"></canvas>
+            <canvas id="pianoRoll" width="800" height="200"></canvas>
+        </section>
+
+        <section class="sequencer">
+            <div class="seq-controls">
+                <label for="seqBpm">Sequencer BPM</label>
+                <input type="number" id="seqBpm" min="40" max="240" value="120">
+                <button id="seqToggle">Start Sequencer</button>
+            </div>
+            <div id="sequencerGrid" class="seq-grid"></div>
+        </section>
+    </div>
+</body>
+
+</html>

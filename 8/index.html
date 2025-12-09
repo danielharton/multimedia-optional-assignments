@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Guessing Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f7fb; color: #1f2933; }
+        h1 { margin-top: 0; }
+        section { margin-bottom: 16px; padding: 12px; background: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        label { font-weight: 600; margin-right: 6px; }
+        button { padding: 8px 14px; border: none; border-radius: 6px; background: #2563eb; color: #fff; cursor: pointer; }
+        button.secondary { background: #334155; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        input[type="range"] { width: 120px; }
+        #history { max-height: 120px; overflow-y: auto; }
+        canvas { background: #eef2f7; border-radius: 6px; }
+        .stat { font-weight: 700; margin-right: 12px; }
+        .pill { padding: 4px 10px; border-radius: 999px; background: #e0e7ff; font-size: 12px; font-weight: 700; }
+        .hint { font-size: 18px; font-weight: 700; }
+        .achievements span { display: inline-block; margin: 4px 6px 0 0; padding: 4px 8px; background: #d1fae5; border-radius: 12px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>Voice-Controlled Number Guessing</h1>
+
+    <section class="row">
+        <div class="row">
+            <button id="guess">Start Listening</button>
+            <button id="new-game" class="secondary">New Game</button>
+            <button id="help" class="secondary">Help</button>
+            <label><input type="checkbox" id="continuous-toggle"> Continuous listening</label>
+            <label><input type="checkbox" id="multiplayer-toggle"> Multiplayer (2 players)</label>
+        </div>
+        <div class="row">
+            <label>Difficulty</label>
+            <select id="difficulty">
+                <option value="easy">Easy (1-50)</option>
+                <option value="medium" selected>Medium (1-100)</option>
+                <option value="hard">Hard (1-1000)</option>
+            </select>
+            <label>Language</label>
+            <select id="language">
+                <option value="en-US" selected>English (US)</option>
+                <option value="en-GB">English (UK)</option>
+                <option value="es-ES">Español (ES)</option>
+                <option value="fr-FR">Français</option>
+                <option value="de-DE">Deutsch</option>
+            </select>
+            <label>Voice</label>
+            <select id="voice"></select>
+        </div>
+        <div class="row">
+            <label>Rate <input type="range" id="rate" min="0.5" max="2" step="0.1" value="1"></label>
+            <label>Pitch <input type="range" id="pitch" min="0" max="2" step="0.1" value="1"></label>
+            <label>Volume <input type="range" id="volume" min="0" max="1" step="0.05" value="1"></label>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <span class="stat">Current player: <span id="current-player">Player 1</span></span>
+            <span class="stat">Attempts: <span id="attempts">0</span></span>
+            <span class="stat">Range: <span id="range-label">1 - 100</span></span>
+            <span class="stat">Timer: <span id="timer">0.0s</span></span>
+            <span class="stat">Best: <span id="best-score">–</span></span>
+            <span class="stat">Avg time: <span id="avg-time">–</span></span>
+            <span class="stat">Wins/Losses: <span id="win-loss">0/0</span></span>
+        </div>
+        <div class="hint" id="hint-text">Say a number to start guessing!</div>
+        <div>Transcript: <span class="pill" id="transcript">—</span></div>
+        <div>History:</div>
+        <ul id="history"></ul>
+    </section>
+
+    <section>
+        <h3>Number Line</h3>
+        <canvas id="rangeCanvas" width="800" height="140"></canvas>
+    </section>
+
+    <section>
+        <h3>Statistics</h3>
+        <div>Attempts per game</div>
+        <canvas id="statsCanvas" width="800" height="160"></canvas>
+        <div class="achievements" id="achievements"></div>
+    </section>
+
+    <script type="text/javascript" src="scripts/speech.js"></script>
+</body>
+</html>

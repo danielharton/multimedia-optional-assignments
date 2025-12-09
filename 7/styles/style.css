@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+}
+
+#map {
+    width: 100vw;
+    height: 100vh;
+}
+
+#control-panel {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 320px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    padding: 12px 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 999;
+}
+
+#control-panel h1 {
+    font-size: 18px;
+    margin: 0 0 8px;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+.control-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.control-group small {
+    display: block;
+    color: #555;
+}
+
+.inline-controls {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    flex: 1;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 6px 10px;
+    border: none;
+    background: #2f80ed;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1c64c0;
+}
+
+button:disabled {
+    background: #888;
+    cursor: not-allowed;
+}
+
+.status {
+    padding: 8px;
+    border-radius: 4px;
+    background: #eef3ff;
+    color: #1c3f8f;
+    margin-bottom: 10px;
+}
+
+#distance-output,
+#route-distance {
+    font-weight: 600;
+}
